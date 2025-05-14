@@ -1,10 +1,8 @@
 import { getWork } from "@/sanity/sanity.query";
+import { WorkProps } from "@/types/sanity";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
 import React from "react";
-type Props = {
-  params: { slug: string };
-};
 
 const list = {
   branding: "Branding & Design",
@@ -13,10 +11,10 @@ const list = {
   seo: "SEO",
   marketing: "Marketing",
 };
-
-const page = async ({ params }: Props) => {
-  const slug = params.slug;
-  const Work = await getWork(slug);
+type Params = Promise<{ slug: string }>;
+const page = async ({ params }: { params: Params }) => {
+  const { slug } = await params;
+  const Work: WorkProps = await getWork(slug);
   return (
     <div className="max-w-5xl mx-auto px-4 py-12">
       <h1 className="text-4xl font-bold mb-4">{Work.title}</h1>
@@ -34,7 +32,7 @@ const page = async ({ params }: Props) => {
       <p className="text-2xl font-semibold text-gray-700 dark:text-gray-100 mb-4">
         Service Type:{" "}
         {Work.service_type.map((service, index) => {
-          const display = list[service];
+          const display = list[service as keyof typeof list];
           return (
             <span
               key={index}

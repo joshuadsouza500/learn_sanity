@@ -37,7 +37,8 @@ const Services = async () => {
         </div>
         <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 py-12 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => {
-            const Icon = serviceIcons[service?.icon];
+            const Icon =
+              serviceIcons[service?.icon as keyof typeof serviceIcons];
             return (
               <div
                 className="flex flex-col items-center space-y-2 rounded-lg border p-6 shadow-sm"
