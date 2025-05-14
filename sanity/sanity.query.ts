@@ -1,5 +1,4 @@
 //All functions for getting data from sanity studio
-
 import { groq } from "next-sanity";
 import client from "./sanity.client";
 import { Hero, Review, WorkProps, Service } from "@/types/sanity";
